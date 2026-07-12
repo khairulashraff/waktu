@@ -20,12 +20,20 @@ SUPERVISOR_SERVICE_NAME="${SUPERVISOR_SERVICE_NAME:-waktu-client}"
 : "${REMOTE_HOST:?Set REMOTE_HOST in apps/client/.env.deploy (copy .env.deploy.example)}"
 : "${REMOTE_APP_DIR:?Set REMOTE_APP_DIR in apps/client/.env.deploy}"
 
+# VITE_API_BASE is baked into the client at build time. The build runs inside the
+# container, so it must be passed through to `docker run` (below) — the .env file
+# is not visible in the image.
+if [ -z "${VITE_API_BASE:-}" ]; then
+  echo "Warning: VITE_API_BASE is not set in .env.deploy — the client will build with"
+  echo "         the default http://localhost:3000 and will not reach a remote API."
+fi
+
 # --- Build Step ---
 # Context is the monorepo root (../..) so the pnpm workspace + lockfile are in
 # scope; the Dockerfile lives here in apps/client.
 echo "Building the Electron application using Docker..."
 docker build -t waktu-client-builder -f Dockerfile ../..
-docker run --rm -v "$(pwd)/release:/repo/apps/client/release" waktu-client-builder
+docker run --rm -e VITE_API_BASE="${VITE_API_BASE:-}" -v "$(pwd)/release:/repo/apps/client/release" waktu-client-builder
 
 # --- Deployment Step ---
 echo "Deploying to ${REMOTE_HOST}..."

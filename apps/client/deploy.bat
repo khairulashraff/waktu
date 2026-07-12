@@ -25,6 +25,14 @@ if not defined REMOTE_APP_DIR (
     exit /b 1
 )
 
+REM VITE_API_BASE is baked into the client at build time. The build runs inside
+REM the container, so it is passed through to "docker run" below (the .env file is
+REM not visible in the image).
+if not defined VITE_API_BASE (
+    echo Warning: VITE_API_BASE not set in .env.deploy; defaulting to http://localhost:3000
+    set "VITE_API_BASE=http://localhost:3000"
+)
+
 REM --- Build Step ---
 REM Context is the monorepo root (..\..) so the pnpm workspace + lockfile are in
 REM scope; the Dockerfile lives here in apps\client.
@@ -34,7 +42,7 @@ if %ERRORLEVEL% neq 0 (
     echo Docker build failed!
     exit /b 1
 )
-docker run --rm -v "%cd%\release:/repo/apps/client/release" waktu-client-builder
+docker run --rm -e VITE_API_BASE=%VITE_API_BASE% -v "%cd%\release:/repo/apps/client/release" waktu-client-builder
 if %ERRORLEVEL% neq 0 (
     echo Docker run failed!
     exit /b 1

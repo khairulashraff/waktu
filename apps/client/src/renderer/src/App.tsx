@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import Clock from "./components/Clock";
 import PrayerTimes from "./components/PrayerTimes";
 import Weather from "./components/Weather";
+import Toaster from "./components/Toaster";
 import { fetchJson } from "./config";
 
 export default function App(): ReactElement {
@@ -32,6 +33,7 @@ export default function App(): ReactElement {
       <Clock />
       <Weather />
       <PrayerTimes />
+      <Toaster />
     </div>
   );
 }
