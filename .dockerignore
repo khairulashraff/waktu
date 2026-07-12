@@ -1,0 +1,12 @@
+# Build context is the monorepo root (see apps/api/Dockerfile). Keep it small and
+# never ship local installs, build outputs, VCS, or env/secret files into layers.
+**/node_modules
+apps/client/out
+apps/client/dist
+apps/client/release
+.git
+**/.env
+**/.env.*
+!**/.env.deploy.example
+!**/.env.example
+apps/api/docker-compose.deploy.yaml

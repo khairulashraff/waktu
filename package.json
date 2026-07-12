@@ -1,0 +1,16 @@
+{
+  "name": "waktu",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Waktu monorepo — prayer-times/weather kiosk. apps/api (Fastify) + apps/client (Electron).",
+  "scripts": {
+    "dev:api": "pnpm --filter waktu-api dev",
+    "dev:client": "pnpm --filter waktu-client dev",
+    "start:api": "pnpm --filter waktu-api start",
+    "build:client": "pnpm --filter waktu-client build:linux",
+    "deploy:build": "pnpm --filter waktu-api deploy:build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint",
+    "format": "pnpm -r format"
+  }
+}

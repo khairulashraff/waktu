@@ -1,0 +1,48 @@
+# DEPLOYMENT TEMPLATE — not something you run directly.
+#
+# `node scripts/deploy-build.mjs` (run on the build machine) builds the API
+# image, pushes it to the registry, and renders THIS file into a
+# self-contained docker-compose.deploy.yaml with a concrete image tag baked in.
+# That generated file is the artifact you copy to the target host and run with:
+#
+#     docker compose -f docker-compose.deploy.yaml up -d
+#
+# Every ${...} below is resolved at render time — from the build tag and the
+# optional .env.deploy file — and baked into the generated file, so the host needs
+# no env file of its own. A `:-default` placeholder falls back to that default
+# when the variable is unset.
+services:
+  # Cache. The API stores upstream responses (aladhan / open-meteo / unsplash)
+  # here so it doesn't re-fetch them on every request. Internal only — the API
+  # reaches it by service name, so it is not published to the host.
+  redis:
+    image: redis:6-alpine
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    image: ${WAKTU_REGISTRY:-localhost:5000}/waktu-api:${WAKTU_TAG}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      # In-network URL points at the compose service name, not a host port.
+      REDIS_URL: redis://redis:6379
+      # Optional — enables the /gambar wallpaper endpoint. Get a key at
+      # https://unsplash.com/developers ; leave unset to disable that route.
+      UNSPLASH_ACCESS_KEY: ${UNSPLASH_ACCESS_KEY:-}
+    ports:
+      # Host port → container :3000. Override WAKTU_PORT in .env.deploy.
+      - "${WAKTU_PORT:-3000}:3000"
+    depends_on:
+      redis:
+        condition: service_healthy
+
+volumes:
+  redis-data:

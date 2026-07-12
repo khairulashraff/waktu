@@ -1,0 +1,59 @@
+<svg width="100%" viewBox="0 0 680 450" role="img" xmlns="http://www.w3.org/2000/svg">
+    <clipPath id="above">
+        <rect x="0" y="0" width="680" height="280" />
+    </clipPath>
+
+    <line x1="80" y1="280" x2="600" y2="280" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        style="fill:rgb(0, 0, 0);stroke:currentColor;currentColor;stroke-width:2px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto" />
+
+    <g clip-path="url(#above)"
+        style="fill:rgb(0, 0, 0);stroke:none;currentColor;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+        <circle cx="340" cy="280" r="160" fill="currentColor"
+            style="fill:currentColor;stroke:none;currentColor;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto" />
+    </g>
+
+    <!--
+    cx=340 cy=280  r_sun=160  r_inner=174 (just outside disc)  r_outer=238 (same as before)
+    x = 340 + r*cos(deg)   y = 280 - r*sin(deg)
+    10°:  cos=0.9848 sin=0.1736
+      i=(340+174*0.9848, 280-174*0.1736)=(511.4,249.8)  o=(574.8,238.7)
+    30°:  cos=0.8660 sin=0.5000
+      i=(340+174*0.8660, 280-174*0.5000)=(490.7,193.0)  o=(546.3,161.0)
+    50°:  cos=0.6428 sin=0.7660
+      i=(340+174*0.6428, 280-174*0.7660)=(451.8,146.9)  o=(492.9, 98.3)
+    70°:  cos=0.3420 sin=0.9397
+      i=(340+174*0.3420, 280-174*0.9397)=(399.5,116.5)  o=(421.4, 56.6)
+    90°:  cos=0.0000 sin=1.0000
+      i=(340, 280-174)=(340.0,106.0)                     o=(340.0, 42.0)
+   110°:  cos=-0.3420 sin=0.9397
+      i=(340-174*0.3420, 280-174*0.9397)=(280.5,116.5)  o=(258.6, 56.6)
+   130°:  cos=-0.6428 sin=0.7660
+      i=(340-174*0.6428, 280-174*0.7660)=(228.2,146.9)  o=(187.1, 98.3)
+   150°:  cos=-0.8660 sin=0.5000
+      i=(340-174*0.8660, 280-174*0.5000)=(189.3,193.0)  o=(133.7,161.0)
+   170°:  cos=-0.9848 sin=0.1736
+      i=(340-174*0.9848, 280-174*0.1736)=(168.6,249.8)  o=(105.2,238.7)
+  -->
+    <g stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.65"
+        style="fill:currentColor;stroke:currentColor;color:currentColor;stroke-width:2px;stroke-linecap:round;stroke-linejoin:miter;opacity:0.65;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+        <line x1="511.4" y1="249.8" x2="574.8" y2="238.7"
+            style="fill:currentColor;stroke:currentColor;color:currentColor;stroke-width:2px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto" />
+        <line x1="490.7" y1="193.0" x2="546.3" y2="161.0"
+            style="fill:currentColor;stroke:currentColor;color:currentColor;stroke-width:2px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto" />
+        <line x1="451.8" y1="146.9" x2="492.9" y2="98.3"
+            style="fill:currentColor;stroke:currentColor;color:currentColor;stroke-width:2px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto" />
+        <line x1="399.5" y1="116.5" x2="421.4" y2="56.6"
+            style="fill:currentColor;stroke:currentColor;color:currentColor;stroke-width:2px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto" />
+        <line x1="340.0" y1="106.0" x2="340.0" y2="42.0"
+            style="fill:currentColor;stroke:currentColor;color:currentColor;stroke-width:2px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto" />
+        <line x1="280.5" y1="116.5" x2="258.6" y2="56.6"
+            style="fill:currentColor;stroke:currentColor;color:currentColor;stroke-width:2px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto" />
+        <line x1="228.2" y1="146.9" x2="187.1" y2="98.3"
+            style="fill:currentColor;stroke:currentColor;color:currentColor;stroke-width:2px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto" />
+        <line x1="189.3" y1="193.0" x2="133.7" y2="161.0"
+            style="fill:currentColor;stroke:currentColor;color:currentColor;stroke-width:2px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto" />
+        <line x1="168.6" y1="249.8" x2="105.2" y2="238.7"
+            style="fill:currentColor;stroke:currentColor;color:currentColor;stroke-width:2px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto" />
+    </g>
+
+</svg>

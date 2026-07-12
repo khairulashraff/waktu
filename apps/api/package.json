@@ -1,0 +1,18 @@
+{
+  "name": "waktu-api",
+  "version": "1.0.0",
+  "description": "Waktu API — Fastify service for prayer times and weather, cached in Redis.",
+  "main": "api.js",
+  "scripts": {
+    "start": "node api",
+    "dev": "node api --dev",
+    "deploy:build": "node scripts/deploy-build.mjs"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^10.0.1",
+    "dayjs": "^1.11.20",
+    "fastify": "^5.1.0",
+    "redis": "^2.8.0"
+  }
+}

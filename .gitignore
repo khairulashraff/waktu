@@ -1,0 +1,22 @@
+node_modules/
+
+# Client build outputs
+apps/client/out/
+apps/client/dist/
+apps/client/release/
+
+# Generated deploy artifact — re-created by `pnpm deploy:build`.
+apps/api/docker-compose.deploy.yaml
+
+# Local env / deploy config (machine-specific). Examples stay tracked.
+.env
+.env.*
+!.env.example
+!.env.deploy.example
+
+# Personal/local client deploy tooling (private infra) — never publish.
+apps/client/deploy.sh
+apps/client/deploy.bat
+apps/client/run.sh
+apps/client/supervisor.conf
+apps/client/dummy/

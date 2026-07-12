@@ -1,0 +1,9 @@
+packages:
+  - "apps/*"
+
+# Approve the postinstall/build scripts these deps ship (pnpm blocks them by
+# default). Electron downloads its runtime binary; esbuild fetches its native
+# binary — both are needed for the client to build/run.
+allowBuilds:
+  electron: true
+  esbuild: true
