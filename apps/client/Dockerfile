@@ -1,20 +1,29 @@
-# Use a modern, secure, Debian-based Node.js image
-FROM node:26-bookworm-slim
+# Electron client BUILDER image.
+#
+# Built from the MONOREPO ROOT as context (so the pnpm workspace + lockfile are in
+# scope) with `-f apps/client/Dockerfile` — deploy.sh / deploy.bat do this for you.
+# The container's CMD (`build:linux`) runs electron-builder and writes the unpacked
+# app to /repo/apps/client/release, which the deploy scripts mount out to the host.
 
-# Install dependencies for electron-builder, including CA certificates
-RUN apt-get update && apt-get install -y p7zip-full ca-certificates --no-install-recommends
+FROM node:22-bookworm-slim
+RUN corepack enable \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends p7zip-full ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
 
-# Set the working directory in the container
-WORKDIR /usr/src/app
+WORKDIR /repo
+# Workspace manifests first for a cacheable install layer. Both app manifests are
+# needed so the frozen lockfile validates against the full workspace; only
+# waktu-client's deps are installed (--filter). Its postinstall (electron-builder
+# install-app-deps) runs here, and pnpm-workspace.yaml carries the build approvals.
+COPY pnpm-workspace.yaml package.json pnpm-lock.yaml .npmrc ./
+COPY apps/api/package.json apps/api/package.json
+COPY apps/client/package.json apps/client/package.json
+RUN pnpm install --frozen-lockfile --filter waktu-client
 
-# Copy package.json and package-lock.json (or npm-shrinkwrap.json)
-COPY package*.json ./
+# Client source (node_modules / build outputs excluded by .dockerignore).
+COPY apps/client apps/client
+WORKDIR /repo/apps/client
 
-# Install app dependencies
-RUN npm install
-
-# Copy the rest of your app's source code
-COPY . .
-
-# Run the build command
-CMD [ "npm", "run", "build:linux" ]
+# Build at container-run time; output lands under ./release (mounted out by deploy).
+CMD ["pnpm", "run", "build:linux"]

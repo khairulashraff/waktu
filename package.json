@@ -8,7 +8,9 @@
     "dev:client": "pnpm --filter waktu-client dev",
     "start:api": "pnpm --filter waktu-api start",
     "build:client": "pnpm --filter waktu-client build:linux",
-    "deploy:build": "pnpm --filter waktu-api deploy:build",
+    "deploy:api": "pnpm --filter waktu-api deploy:build",
+    "deploy:client": "pnpm --filter waktu-client run deploy:host",
+    "deploy:all": "pnpm run deploy:api && pnpm run deploy:client",
     "typecheck": "pnpm -r typecheck",
     "lint": "pnpm -r lint",
     "format": "pnpm -r format"

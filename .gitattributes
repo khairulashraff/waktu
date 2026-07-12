@@ -1,0 +1,10 @@
+# Normalize line endings in the repo. Default to LF; force the platform-specific
+# endings the interpreters require so scripts work after any checkout.
+* text=auto eol=lf
+
+# Windows batch files must be CRLF or cmd.exe mis-parses them.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Shell scripts must stay LF.
+*.sh text eol=lf

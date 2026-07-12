@@ -14,9 +14,6 @@ apps/api/docker-compose.deploy.yaml
 !.env.example
 !.env.deploy.example
 
-# Personal/local client deploy tooling (private infra) — never publish.
-apps/client/deploy.sh
-apps/client/deploy.bat
-apps/client/run.sh
-apps/client/supervisor.conf
+# Client deploy scratch (binary artifact) — not for the repo. The deploy scripts
+# themselves are tracked; their host-specific values live in the ignored .env.deploy.
 apps/client/dummy/

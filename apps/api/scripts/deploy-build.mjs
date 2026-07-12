@@ -32,12 +32,19 @@ const TEMPLATE = "docker-compose.yaml";
 const GENERATED = "docker-compose.deploy.yaml";
 const ENV_FILE = process.env.WAKTU_ENV_FILE ?? ".env.deploy";
 
-// Registry the image is pushed to. Override WAKTU_REGISTRY to point elsewhere.
-const REGISTRY = process.env.WAKTU_REGISTRY ?? "localhost:5000";
+// Read the deploy env file once, up front, so the build/push honor it too — not
+// just the rendered compose. Precedence for every knob: a real environment
+// variable wins (one-off override), then the .env.deploy value, then the default.
+const fileEnv = readDotEnv(join(projectRoot, ENV_FILE));
+
+// Registry the image is pushed to and the compose pulls from.
+const REGISTRY =
+  process.env.WAKTU_REGISTRY ?? fileEnv.WAKTU_REGISTRY ?? "localhost:5000";
 
 // The target host's CPU architecture. Many small/ARM boxes are arm64; for an x86
 // host set WAKTU_PLATFORM=linux/amd64. buildx emulates the target arch via QEMU.
-const PLATFORM = process.env.WAKTU_PLATFORM ?? "linux/arm64";
+const PLATFORM =
+  process.env.WAKTU_PLATFORM ?? fileEnv.WAKTU_PLATFORM ?? "linux/arm64";
 
 const IMAGE_NAME = "waktu-api";
 
@@ -105,7 +112,7 @@ console.log(`Build tag: ${tag}`);
 // fast rather than after the image is already pushed. WAKTU_TAG is injected here;
 // everything else comes from the (optional) deploy env file or its inline default.
 const values = {
-  ...readDotEnv(join(projectRoot, ENV_FILE)),
+  ...fileEnv,
   WAKTU_TAG: tag,
   WAKTU_REGISTRY: REGISTRY,
 };

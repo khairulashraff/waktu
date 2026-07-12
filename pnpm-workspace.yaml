@@ -1,6 +1,12 @@
 packages:
   - "apps/*"
 
+# Don't auto-run `pnpm install` before `pnpm run <script>`. Otherwise a manifest
+# edit makes pnpm reinstall first, and that pre-run install fires the client's
+# electron-builder postinstall — which breaks `deploy:all` (and, in a production
+# context, prunes devDependencies). Install explicitly instead.
+verifyDepsBeforeRun: false
+
 # Approve the postinstall/build scripts these deps ship (pnpm blocks them by
 # default). Electron downloads its runtime binary; esbuild fetches its native
 # binary — both are needed for the client to build/run.
